@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss'],
+  selector: 'app-lottery',
+  templateUrl: 'lottery.page.html',
+  styleUrls: ['lottery.page.scss'],
   standalone: true,
   imports: [IonicModule],
 })
-export class Tab2Page {
+export class LotteryPage {
   constructor() {}
 }
