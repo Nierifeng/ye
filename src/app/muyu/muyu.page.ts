@@ -20,7 +20,7 @@ export class Tab2Page implements OnInit {
   public clickAmount: number = 0;
 
   ngOnInit(): void {
-    this.getClickAmount();
+    this.getClickAmount( false );
   }
 
   addFloatingText() {

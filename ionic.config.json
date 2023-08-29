@@ -1,7 +1,7 @@
 {
-  "name": "ye",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular-standalone"
+    "name": "ye",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "angular"
 }

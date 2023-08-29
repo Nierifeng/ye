@@ -14,7 +14,7 @@ export const routes: Routes = [
       {
         path: 'wooden-fish',
         loadComponent: () =>
-          import('../tab2/tab2.page').then((m) => m.Tab2Page),
+          import('../muyu/muyu.page').then((m) => m.Tab2Page),
       },
       {
         path: '',
