@@ -1,25 +1,85 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+interface HttpResponse {
+  result?: {
+    data: CaiPiaoData;
+  };
+}
+
+interface CaiPiaoData {
+  redResults?: Array<string>;
+  blueResults?: Array<string>;
+  allResults?: string;
+  openTime?: string;
+  nextOpenTime?: string;
+  issueNo?: string;
+  nextIssueNo?: string;
+}
 
 @Component({
   selector: 'app-lottery',
   templateUrl: 'lottery.page.html',
   styleUrls: ['lottery.page.scss'],
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule, HttpClientModule],
 })
 export class LotteryPage implements OnInit {
   public daLeTou: string = '';
+  public daLeTouLastPoolDraw?: CaiPiaoData;
   public shuangSeqiu: string = '';
-  constructor() {}
+  public shuangSeqiuLastPoolDraw?: CaiPiaoData;
+  public constructor(private httpServer: HttpClient) {}
+
+  private httpParams = {
+    format: 'json',
+    __caller__: 'wap',
+    __version__: '1.0.0',
+    __verno__: 1,
+    cat1: 'gameOpenInfo',
+    dpc: 1,
+  };
+
   public ngOnInit(): void {
     this.generateNumber();
+    this.showLastInfo('daLeTou');
+    this.showLastInfo('shuangSeqiu');
   }
 
   public generateNumber() {
-    console.log(1);
     this.daLeTou = this.generateDaLeTouRandomArray();
     this.shuangSeqiu = this.generateSSQRandomNumbers();
+  }
+
+  public showLastInfo(type: 'daLeTou' | 'shuangSeqiu') {
+    this.httpServer
+      .get<HttpResponse>(
+        'https://mix.lottery.sina.com.cn/gateway/index/entry/',
+        {
+          params: {
+            ...this.httpParams,
+            lottoType: type === 'daLeTou' ? 201 : 101,
+          },
+        }
+      )
+      .subscribe((res) => {
+        type === 'daLeTou'
+          ? (this.daLeTouLastPoolDraw = {
+              ...res.result?.data,
+              allResults: [
+                ...(res.result?.data.redResults ?? []),
+                ...(res.result?.data.blueResults ?? []),
+              ].join(' '),
+            })
+          : (this.shuangSeqiuLastPoolDraw = {
+              ...res.result?.data,
+              allResults: [
+                ...(res.result?.data.redResults ?? []),
+                ...(res.result?.data.blueResults ?? []),
+              ].join(' '),
+            });
+      });
   }
 
   private generateDaLeTouRandomArray(): string {
@@ -44,7 +104,7 @@ export class LotteryPage implements OnInit {
       selectedYellowBalls.push(selectedBall);
     }
 
-    return [...selectedBlueBalls, ...selectedYellowBalls].join(',');
+    return [...selectedBlueBalls, ...selectedYellowBalls].join(' ');
   }
 
   private generateSSQRandomNumbers(): string {
@@ -64,6 +124,6 @@ export class LotteryPage implements OnInit {
 
     const selectedBlueBall =
       blueBalls[Math.floor(Math.random() * blueBalls.length)];
-    return [...selectedRedBalls, selectedBlueBall].join(',');
+    return [...selectedRedBalls, selectedBlueBall].join(' ');
   }
 }

@@ -5,18 +5,72 @@
 </ion-header>
 
 <ion-content>
-  <button class="btn" (click)="generateNumber">刷新号码</button>
-  <div>大乐透号码:{{daLeTou}}</div>
-  <div>双色球号码:{{shuangSeqiu}}</div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle> 大乐透 </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="full">
+        <ion-label position="stacked"> 随机号码 </ion-label>
+        <div>
+          <ion-label> {{daLeTou}}</ion-label>
+        </div>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked"> 下期时间 </ion-label>
+        <div>
+          <ion-label> {{daLeTouLastPoolDraw?.nextOpenTime}}</ion-label>
+        </div>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked"> 上期号码 </ion-label>
+        <div>
+          <ion-label> {{daLeTouLastPoolDraw?.allResults}}</ion-label>
+        </div>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked"> 上期时间 </ion-label>
+        <div>
+          <ion-label> {{daLeTouLastPoolDraw?.openTime}}</ion-label>
+        </div>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle> 双色球号码 </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="full">
+        <ion-label position="stacked"> 随机号码 </ion-label>
+        <div>
+          <ion-label> {{shuangSeqiu}}</ion-label>
+        </div>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked"> 下期时间 </ion-label>
+        <div>
+          <ion-label> {{shuangSeqiuLastPoolDraw?.nextOpenTime}}</ion-label>
+        </div>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked"> 上期号码 </ion-label>
+        <div>
+          <ion-label> {{shuangSeqiuLastPoolDraw?.allResults}}</ion-label>
+        </div>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked"> 上期时间 </ion-label>
+        <div>
+          <ion-label> {{shuangSeqiuLastPoolDraw?.openTime}}</ion-label>
+        </div>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 <ion-footer>
-  <ion-button
-    expand="block"
-    [mode]="'ios'"
-    (ionFocus)="generateNumber"
-    (ionBlur)="generateNumber"
-    (click)="generateNumber"
-    >刷新号码</ion-button
-  >
+  <ion-button expand="block" [mode]="'ios'" (click)="generateNumber()">
+    刷新号码
+  </ion-button>
 </ion-footer>

@@ -12,4 +12,8 @@ export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor() {}
+
+  public butC() {
+    console.log(1);
+  }
 }

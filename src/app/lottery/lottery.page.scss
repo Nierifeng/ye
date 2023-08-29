@@ -18,17 +18,19 @@
     animation: animate 8s linear infinite;
   }
 }
+ion-item {
+  --highlight-height: 2px;
+  --highlight-color-focused: #43e7f3;
+  --highlight-color-valid: #6f58d8;
+  --highlight-color-invalid: #ff46be;
+}
 
 @keyframes animate {
   0% {
-    opacity: 1;
     background-position: 0%;
-    transform: translateY(0px);
   }
 
   100% {
-    opacity: 0;
-    transform: translateY(-60px);
     background-position: 400%;
   }
 }
