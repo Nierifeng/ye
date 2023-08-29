@@ -1,22 +1,15 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> 彩票 </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title> 彩票 </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <button class="btn" (click)="generateNumber">刷新号码</button>
-  <div>大乐透号码:{{daLeTou}}</div>
-  <div>双色球号码:{{shuangSeqiu}}</div>
+    <button class="btn" (click)="generateNumber">刷新号码</button>
+    <div>大乐透号码:{{daLeTou}}</div>
+    <div>双色球号码:{{shuangSeqiu}}</div>
 </ion-content>
 
 <ion-footer>
-  <ion-button
-    expand="block"
-    [mode]="'ios'"
-    (ionFocus)="generateNumber"
-    (ionBlur)="generateNumber"
-    (click)="generateNumber"
-    >刷新号码</ion-button
-  >
+    <ion-button expand="block" [mode]="'ios'" (ionFocus)="generateNumber" (ionBlur)="generateNumber" (click)="generateNumber">刷新号码</ion-button>
 </ion-footer>

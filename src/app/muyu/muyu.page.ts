@@ -21,7 +21,7 @@ export class Tab2Page implements OnInit {
   public clickAmount: number = 0;
 
   ngOnInit(): void {
-    this.getClickAmount();
+    this.getClickAmount( false );
   }
 
   addFloatingText() {
@@ -41,11 +41,12 @@ export class Tab2Page implements OnInit {
     }, 1500 );
   }
 
-  private getClickAmount(): void {
+  private getClickAmount( notInit: boolean = true ): void {
     if ( this.clickAmount == 0 ) {
       this.clickAmount = this.storageService.getData<number>( this.clickKey ) || 0;
     }
-    this.clickAmount += 1;
+    if ( notInit )
+      this.clickAmount += 1;
     this.storageService.addData( this.clickKey, this.clickAmount );
   }
 }
