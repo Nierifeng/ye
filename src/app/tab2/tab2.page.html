@@ -1,15 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<div id="container" class="clickable" (click)="addFloatingText()">
+    <div>
+        <h3 style="text-align: center;color: white;">今日功德:+{{clickAmount}}</h3>
+    </div>
+    <div class="content" id="content">
+        <ion-img src="../../assets/images/muyu.png"></ion-img>
+    </div>
+</div>
+<video id="video" src="../../assets/video/muyu.mp4"></video>

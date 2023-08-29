@@ -12,7 +12,7 @@ export const routes: Routes = [
           import('../lottery/lottery.page').then((m) => m.LotteryPage),
       },
       {
-        path: 'tab2',
+        path: 'wooden-fish',
         loadComponent: () =>
           import('../tab2/tab2.page').then((m) => m.Tab2Page),
       },
