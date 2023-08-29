@@ -4,9 +4,9 @@ import { IonicModule } from '@ionic/angular';
 import { StorageService } from 'src/lib/storage';
 
 @Component( {
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss'],
+  selector: 'app-muyu',
+  templateUrl: 'muyu.page.html',
+  styleUrls: ['muyu.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule]
 } )
