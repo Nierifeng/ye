@@ -1,8 +1,8 @@
-<div id="container" class="clickable" (click)="addFloatingText()">
+<div id="container" class="clickable">
     <div>
         <h3 style="text-align: center;color: white;">今日功德:+{{clickAmount}}</h3>
     </div>
-    <div class="content" id="content">
+    <div class="content" id="content" (click)="addFloatingText()">
         <ion-img src="../../assets/images/muyu.png"></ion-img>
     </div>
 </div>
