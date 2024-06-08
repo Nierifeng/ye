@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title> 彩票 </ion-title>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-title> 彩票 </ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -10,10 +10,10 @@
       <ion-card-subtitle> 大乐透 </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-item lines="full">
+      <ion-item lines="full" (click)="copyToClipboard('daLeTou')">
         <ion-label position="stacked"> 随机号码 </ion-label>
         <div>
-          <ion-label> {{daLeTou}}</ion-label>
+          <ion-label> {{daLeTou}} </ion-label>
         </div>
       </ion-item>
       <ion-item lines="full">
@@ -41,7 +41,7 @@
       <ion-card-subtitle> 双色球号码 </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-item lines="full">
+      <ion-item lines="full" (click)="copyToClipboard('shuangSeqiu')">
         <ion-label position="stacked"> 随机号码 </ion-label>
         <div>
           <ion-label> {{shuangSeqiu}}</ion-label>

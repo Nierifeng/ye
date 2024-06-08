@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { Component, inject, OnInit } from '@angular/core';
+import { IonicModule, ToastController } from '@ionic/angular';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Clipboard } from '@capacitor/clipboard';
 
 interface HttpResponse {
   result?: {
@@ -30,7 +31,10 @@ export class LotteryPage implements OnInit {
   public daLeTouLastPoolDraw?: CaiPiaoData;
   public shuangSeqiu: string = '';
   public shuangSeqiuLastPoolDraw?: CaiPiaoData;
-  public constructor(private httpServer: HttpClient) {}
+  private httpServer: HttpClient = inject(HttpClient);
+  private toastController: ToastController = inject(ToastController);
+
+  public constructor() {}
 
   private httpParams = {
     format: 'json',
@@ -80,6 +84,20 @@ export class LotteryPage implements OnInit {
               ].join(' '),
             });
       });
+  }
+
+  public async copyToClipboard(type: 'daLeTou' | 'shuangSeqiu') {
+    const text = type === 'daLeTou' ? this.daLeTou : this.shuangSeqiu;
+    Clipboard.write({ string: text });
+    const toast = await this.toastController.create({
+      message: `🎉 已复制${type === 'daLeTou' ? '大乐透' : '双色球'}号码 今晚必定中大奖 🥳`,
+      duration: 2000,
+      position: 'top',
+      animated: true,
+      mode:"ios"
+    });
+    toast.isOpen = true;
+    console.log(toast);
   }
 
   private generateDaLeTouRandomArray(): string {
