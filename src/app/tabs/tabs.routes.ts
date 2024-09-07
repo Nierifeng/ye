@@ -17,6 +17,11 @@ export const routes: Routes = [
           import('../muyu/muyu.page').then((m) => m.Tab2Page),
       },
       {
+        path: 'lb',
+        loadComponent: () =>
+          import('../lbxx/lbxx.page').then((m) => m.LbxxPage),
+      },
+      {
         path: '',
         redirectTo: '/tabs/lottery',
         pathMatch: 'full',
