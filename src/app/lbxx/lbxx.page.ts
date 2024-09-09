@@ -1,15 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { IonicModule, ToastController } from '@ionic/angular';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Clipboard } from '@capacitor/clipboard';
 import { NgOptimizedImage } from '@angular/common';
-import { lastValueFrom } from 'rxjs';
-
-interface HttpResponse {
-  result?: {
-    data: CaiPiaoData;
-  };
-}
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, inject, OnInit } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { Filesystem, Directory } from '@capacitor/filesystem';
 
 interface CaiPiaoData {
   redResults?: Array<string>;
@@ -53,6 +46,40 @@ export class LbxxPage implements OnInit {
       });
     });
   }
+
+  public async saveImage(): Promise<void> {
+    this.saveImageToGallery(this.imgSrc);
+  }
+
+  private async saveImageToGallery(imageUrl: string) {
+    try {
+      // 获取图片数据
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      debugger
+      // 将图片保存到文件系统
+      const fileName = new Date().getTime() + '.jpeg';
+      const savedFile = await Filesystem.writeFile({
+        path: fileName,
+        data: blob as any,
+        directory: Directory.Library,
+      });
+
+      // 将保存的文件移动到相册
+      await Filesystem.copy({
+        from: savedFile.uri,
+        to: fileName,
+        directory: Directory.Cache,
+        toDirectory: Directory.External,
+      });
+      console.log('Image saved to gallery');
+    } catch (error) {
+      console.error('Error saving image to gallery', error);
+    }
+  }
+
+  // 保存到相册
+  public async saveToAlbum(): Promise<void> {}
 
   public ngOnInit(): void {
     // this.updateImgUrl();

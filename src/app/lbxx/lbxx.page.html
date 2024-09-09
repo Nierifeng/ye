@@ -4,9 +4,12 @@
     <ion-button slot="end" [mode]="'ios'" (click)="updateImgUrl()">
       刷新
     </ion-button>
+    <ion-button slot="end" [mode]="'ios'" (click)="saveImage()">
+      保存
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <img [ngSrc]="imgSrc" fill style="object-fit: contain;" />
+  <img [ngSrc]="imgSrc" fill style="object-fit: contain" />
 </ion-content>
